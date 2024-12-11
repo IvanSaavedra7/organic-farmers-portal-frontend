@@ -1,6 +1,6 @@
 [build]
   command = "ng build --configuration production"
-  publish = "dist/organic-farmers-portal"
+  publish = "dist/organic-farmers-portal/browser"
 
 [[redirects]]
   from = "/*"
