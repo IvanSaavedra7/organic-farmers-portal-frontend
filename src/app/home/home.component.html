@@ -1,73 +1,14 @@
-<div class="container">
-    <!-- Cabeçalho -->
-    <header class="d-flex justify-content-between align-items-center py-3">
-      <a href="#" class="logo">
-        <img src="assets/logo.png" alt="Agricultura Saudável" />
-      </a>
-      <nav class="d-flex align-items-center">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Início</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Produtores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Quem somos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contato</a>
-          </li>
-        </ul>
-        <button class="btn btn-outline-secondary" type="button">Pesquisar...</button>
-      </nav>
-    </header>
-  
-    <!-- Seção de Produtores -->
-    <section class="py-5">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="text-center mb-4">Produtores</h2>
-        </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-outline-secondary btn-sm mb-3">Voltar</a>
-        </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="assets/produtor1.jpg" alt="Produtor 1" class="card-img-top" /> <!-- Recomendo usar imagens de 300x200px -->
-            <div class="card-body">
-              <h5 class="card-title">Produtor 1</h5>
-              <p class="card-text">Descrição do Produtor 1.</p>
-              <a href="#" class="btn btn-primary">Ver mais</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="assets/produtor2.jpg" alt="Produtor 2" class="card-img-top" /> <!-- Recomendo usar imagens de 300x200px -->
-            <div class="card-body">
-              <h5 class="card-title">Produtor 2</h5>
-              <p class="card-text">Descrição do Produtor 2.</p>
-              <a href="#" class="btn btn-primary">Ver mais</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="assets/produtor3.jpg" alt="Produtor 3" class="card-img-top" /> <!-- Recomendo usar imagens de 300x200px -->
-            <div class="card-body">
-              <h5 class="card-title">Produtor 3</h5>
-              <p class="card-text">Descrição do Produtor 3.</p>
-              <a href="#" class="btn btn-primary">Ver mais</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<app-header></app-header>
+<app-main-header></app-main-header>
+
+<section class="hero-section">
+  <video autoplay muted loop id="bg-video">
+    <source src="assets/videos/farm.mp4" type="video/mp4">
+  </video>
+  <div class="content-overlay">
+    <h1 class="title">Agricultura sustentável é a nossa paixão</h1>
+    <p class="subtitle">Se você trabalha com produção orgânica e deseja divulgar seu trabalho podemos dar uma mãozinha</p>
+    <button class="cta-button">INICIAR CADASTRO</button>
   </div>
+  <div class="bottom-line"></div>
+</section>
