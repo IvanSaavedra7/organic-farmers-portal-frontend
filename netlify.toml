@@ -1,6 +1,6 @@
 [build]
   publish = "dist/organic-farmers-portal"
-  command = "ng build --prod --aot --build-optimizer --optimization"
+  command = "ng build"
 
 [[redirects]]
   from = "/*"
