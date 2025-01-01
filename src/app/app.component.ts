@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MockDataService } from './mock-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'organic-farmers-portal';
+
+  constructor(private mockDataService: MockDataService) {}
+
+  async ngOnInit() {
+    await this.mockDataService.initializeMockData();
+  }
 
   
 }

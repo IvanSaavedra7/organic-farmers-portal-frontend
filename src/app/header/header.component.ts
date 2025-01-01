@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
         console.log(data)
         this.userLocation = `${address.city || address.town}, ${address.state}, ${address.suburb || address.neighbourhood}`;
         this.locationState = 'success';
+        localStorage.setItem('userAddress', JSON.stringify(address));
       })
       .catch(error => {
         console.error('Erro na geocodificação reversa:', error);

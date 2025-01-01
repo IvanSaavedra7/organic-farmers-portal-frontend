@@ -1,0 +1,114 @@
+<app-header></app-header>
+<app-main-header></app-main-header>
+
+<section class="search-section container-fluid">
+  <h2 class="section-title"><span class="text-success"> Pesquisar </span> produtores organicos, feiras e pontos de
+    distribuição</h2>
+  <hr class="section-divider">
+
+  <mat-card class="filter-card mb-4 mx-4">
+    <mat-card-content>
+      <form [formGroup]="filterForm" class="row g-3">
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" placeholder="Nome do produtor">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tipo de Local</mat-label>
+            <mat-select formControlName="tipoLocal">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let tipo of tiposLocal" [value]="tipo">
+                {{tipo | titlecase}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tipo de Produto</mat-label>
+            <mat-select formControlName="tipoProduto">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let tipo of tiposProdutos" [value]="tipo">
+                {{tipo | titlecase}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Região</mat-label>
+            <mat-select formControlName="regiao">
+              <mat-option value="">Todas</mat-option>
+              <mat-option *ngFor="let regiao of regioes" [value]="regiao">
+                {{regiao | titlecase}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cep" placeholder="00000-000" mask="00000-000">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Produtos</mat-label>
+            <mat-select formControlName="produtos" multiple>
+              <mat-option *ngFor="let produto of produtosList" [value]="produto">{{produto}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12 text-end">
+          <button mat-stroked-button color="warn" type="button" (click)="clearFilters()">Limpar Filtros</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="results-container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let item of items">
+        <mat-card class="produtor-card h-100 mb-3">
+          <mat-card-header>
+            <mat-card-title>{{item.nome}}</mat-card-title>
+            <mat-card-subtitle>{{item.tipo | titlecase}} - {{item.regiao | titlecase}} - {{item.cidade}},
+              {{item.estado}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image
+            [src]="item.imagens && item.imagens.length > 0 ? item.imagens[0] : 'assets/placeholder.jpg'"
+            alt="Foto do item" class="mb-3">
+          <mat-card-content>
+            <p>{{item.descricaoHistoria}}</p>
+            <ng-container *ngIf="isProdutor(item)">
+              <p><strong>Produtos:</strong> {{item.produtos.join(', ')}}</p>
+            </ng-container>
+            <ng-container *ngIf="isPontoDistribuicao(item)">
+              <p><strong>Tipos de Produtos:</strong> {{item.tiposProdutos.join(', ')}}</p>
+            </ng-container>
+            <p><strong>Funcionamento:</strong> {{item.descricaoFuncionamento}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-icon-button [href]="item.contatos.whatsapp" target="_blank" aria-label="WhatsApp"
+              *ngIf="item.contatos.whatsapp">
+              <mat-icon svgIcon="whatsapp"></mat-icon>
+            </a>
+            <a mat-icon-button [href]="'mailto:' + item.contatos.email" aria-label="Email" *ngIf="item.contatos.email">
+              <mat-icon>email</mat-icon>
+            </a>
+            <a mat-icon-button [href]="item.contatos.instagram" target="_blank" aria-label="Instagram"
+              *ngIf="item.contatos.instagram">
+              <mat-icon svgIcon="instagram"></mat-icon>
+            </a>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="items.length === 0" class="text-center mt-4">
+    Nenhum item encontrado com os filtros selecionados.
+  </p>
+</section>

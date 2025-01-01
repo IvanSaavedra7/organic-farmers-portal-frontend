@@ -1,4 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatabaseService } from '../database.service';
+import { IPontoDistribuicao, IProdutor } from '../models/produtor.model';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +14,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
 
-  constructor() { }
+  
 
-  ngOnInit(): void { }
+  constructor(private router: Router
+  ) {
+  }
+
+  ngOnInit() {
+  }
+
+  navigateToSearch(tipoProduto: string) {
+    this.router.navigate(['/pesquisar'], { 
+      queryParams: { tipoProduto: tipoProduto }
+    });
+  }
+
+  ////////////////////////////////////////////
 
   ngAfterViewInit(): void {
     this.setupVideoLoop();
