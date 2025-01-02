@@ -15,6 +15,8 @@ export interface IProdutor {
     rua: string;
     bairro: string;
     cep:string;
+    latitude: number;
+    longitude: number;
     descricaoHistoria: string;
     produtos: string[];
     pontoDistribuicaoId?: number;
@@ -39,6 +41,8 @@ export interface IProdutor {
     rua: string;
     bairro: string;
     cep:string;
+    latitude: number;
+    longitude: number;
     descricaoHistoria: string;
     imagens: string[]; // URLs ou base64 das imagens
     diasFeira?: string[]; // Apenas para feiras

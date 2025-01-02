@@ -17,7 +17,7 @@ export class SearchComponent {
     filterForm: FormGroup;
     items: (IProdutor | IPontoDistribuicao)[] = [];
     produtosList: string[] = [];
-    tiposProdutos: string[] = ['legumes', 'hortaliças', 'frutas', 'grãos', 'laticínios', 'animal'];
+    tiposProdutos: string[] = ['legumes', 'hortaliças', 'frutas', 'grãos', 'tuberculos', 'animal'];
     regioes: string[] = ['sul', 'leste', 'norte', 'oeste', 'centro'];
     tiposLocal: string[] = ['produtor', 'feira', 'mercado'];
   
@@ -41,19 +41,20 @@ export class SearchComponent {
     ngOnInit() {
       this.registerCustomIcons();
 
-      this.route.queryParams.subscribe(params => {
-        if (params['tipoProduto']) {
-          this.filterForm.patchValue({ tipoProduto: params['tipoProduto'] });
-        }
-        if (params['tipoLocal']) {
-          this.filterForm.patchValue({ tipoLocal: params['tipoLocal'] });
-        }
-        if (params['nome']) {
-          this.filterForm.patchValue({ nome: params['nome'] });
-        }
-        this.onSubmit(); // Aplica os filtros automaticamente
+      this.route.queryParams.pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      ).subscribe(params => {
+        const filterKeys = ['nome', 'tipoLocal', 'tipoProduto', 'regiao', 'cep', 'produtos'];
+        
+        filterKeys.forEach(key => {
+          if (params[key]) {
+            this.filterForm.patchValue({ [key]: params[key] });
+          }
+        });
+    
+        this.onSubmit();
       });
-
       this.loadItems();
       this.setupFormListeners();
       this.setUserLocation();
@@ -96,8 +97,8 @@ export class SearchComponent {
   
     setUserLocation() {
       const userAddress = JSON.parse(localStorage.getItem('userAddress') || '{}');
-      if (userAddress.postcode) {
-        this.filterForm.patchValue({ cep: userAddress.postcode });
+      if (userAddress.address.postcode) {
+        this.filterForm.patchValue({ cep: userAddress.address.postcode });
       }
     }
   

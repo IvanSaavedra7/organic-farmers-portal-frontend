@@ -2,7 +2,7 @@
 <app-main-header></app-main-header>
 
 <section class="search-section container-fluid">
-  <h2 class="section-title"><span class="text-success"> Pesquisar </span> produtores organicos, feiras e pontos de
+  <h2 class="section-title"><span class="text-success"> Pesquisar </span> produtores orgânicos, feiras e pontos de
     distribuição</h2>
   <hr class="section-divider">
 
@@ -69,18 +69,16 @@
     </mat-card-content>
   </mat-card>
 
-  <div class="results-container">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <div class="col" *ngFor="let item of items">
-        <mat-card class="produtor-card h-100 mb-3">
+  <div class="results-container mx-4">
+    <div class="grid-layout">
+      <div class="grid-item mb-3" *ngFor="let item of items">
+        <mat-card class="produtor-card">
           <mat-card-header>
             <mat-card-title>{{item.nome}}</mat-card-title>
             <mat-card-subtitle>{{item.tipo | titlecase}} - {{item.regiao | titlecase}} - {{item.cidade}},
               {{item.estado}}</mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image
-            [src]="item.imagens && item.imagens.length > 0 ? item.imagens[0] : 'assets/placeholder.jpg'"
-            alt="Foto do item" class="mb-3">
+          <img mat-card-image [src]="item.imagens && item.imagens.length > 0 ? item.imagens[0] : 'assets/placeholder.jpg'" alt="Foto do item" class="card-image">
           <mat-card-content>
             <p>{{item.descricaoHistoria}}</p>
             <ng-container *ngIf="isProdutor(item)">

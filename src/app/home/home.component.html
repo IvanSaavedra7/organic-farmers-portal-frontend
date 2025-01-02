@@ -14,4 +14,72 @@
   <div class="bottom-line"></div>
 </section>
 
+<section class="category-section container-fluid">
+  <h2 class="section-title">Produtores Por <span class="text-success">Categoria</span></h2>
+  <hr class="section-divider">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
+    <div class="col" *ngFor="let category of categories">
+      <div class="category-card h-100" (click)="navigateToSearchByCategory(category.type)">
+        <div class="category-image-container">
+          <img [src]="'assets/images/' + category.image" [alt]="category.name" class="category-image">
+        </div>
+        <h3 class="category-name">{{category.name}}</h3>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="popular-section container-fluid">
+  <div class="d-flex justify-content-between align-items-center text-center">
+    <h2 class="section-title d-inline-block me-3">Mais <span class="text-success">Procurados</span></h2>
+    <button class="btn btn-outline-success d-inline-block">Veja Mais ></button>
+  </div>
+  <hr class="section-divider">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let item of popularItems">
+      <div class="popular-card p-3">
+        <div class="popular-image-container">
+          <img [src]="item.imagens[0]" [alt]="item.nome" class="popular-image">
+          <h3 class="popular-name">{{item.nome}}</h3>
+        </div>
+        <button class="btn btn-success btn-block mt-3" (click)="navigateToSearchByName(item.nome)">MAIS INFORMAÇÕES</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="map-section container-fluid ">
+  <h2 class="section-title mx-4">Mapa com <span class="text-success">Pontos de Venda</span></h2>
+  <hr class="section-divider mx-4">
+  <div class="row mx-4">
+    <div class="col-md-8">
+      <div id="map" style="height: 400px;"></div>
+    </div>
+    <div class="col-md-4">
+      <div class="map-legend">
+        <h3>Legenda</h3>
+        <ul class="list-unstyled">
+          <li><img src="assets/icons/producer-icon.png" alt="Produtor" class="legend-icon"> Produtores</li>
+          <li><img src="assets/icons/market-icon.png" alt="Mercado" class="legend-icon"> Mercados</li>
+          <li><img src="assets/icons/fair-icon.png" alt="Feira" class="legend-icon"> Feiras</li>
+        </ul>
+      </div>
+      <div class="map-filters mt-3">
+        <h3>Filtros</h3>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="showProducers" (change)="updateMarkers()">
+          <label class="form-check-label">Mostrar Produtores</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="showMarkets" (change)="updateMarkers()">
+          <label class="form-check-label">Mostrar Mercados</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="showFairs" (change)="updateMarkers()">
+          <label class="form-check-label">Mostrar Feiras</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
