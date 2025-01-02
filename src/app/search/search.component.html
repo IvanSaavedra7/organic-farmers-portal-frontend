@@ -73,7 +73,7 @@
     <div class="grid-layout">
       <div class="grid-item mb-3" *ngFor="let item of items">
         <mat-card class="produtor-card">
-          <mat-card-header>
+          <mat-card-header class="mb-3">
             <mat-card-title>{{item.nome}}</mat-card-title>
             <mat-card-subtitle>{{item.tipo | titlecase}} - {{item.regiao | titlecase}} - {{item.cidade}},
               {{item.estado}}</mat-card-subtitle>
@@ -84,7 +84,7 @@
             <ng-container *ngIf="isProdutor(item)">
               <p><strong>Produtos:</strong> {{item.produtos.join(', ')}}</p>
             </ng-container>
-            <ng-container *ngIf="isPontoDistribuicao(item)">
+            <ng-container *ngIf="item.tiposProdutos && item.tiposProdutos.length > 0">
               <p><strong>Tipos de Produtos:</strong> {{item.tiposProdutos.join(', ')}}</p>
             </ng-container>
             <p><strong>Funcionamento:</strong> {{item.descricaoFuncionamento}}</p>

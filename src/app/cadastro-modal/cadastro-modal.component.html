@@ -1,0 +1,133 @@
+<h2 mat-dialog-title>Cadastro de Nova Localidade</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" required maxlength="100">
+      <mat-hint align="end">{{form.get('nome')?.value?.length || 0}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo" required>
+        <mat-option value="produtor">Produtor</mat-option>
+        <mat-option value="mercado">Mercado</mat-option>
+        <mat-option value="feira">Feira</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tipos de Produtos</mat-label>
+        <mat-select formControlName="tiposProdutos" multiple>
+          <mat-option *ngFor="let tipo of tiposProdutos" [value]="tipo.value">
+            {{tipo.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('tiposProdutos')?.hasError('required')">
+          Selecione pelo menos um tipo de produto
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Produtos</mat-label>
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let produto of produtos"
+            (removed)="removeProduto(produto)">
+            {{produto}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addProduto($event)">
+        </mat-chip-grid>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>WhatsApp</mat-label>
+      <span matPrefix>+55 &nbsp;</span>
+      <input matInput formControlName="whatsapp" required placeholder="19 12345-6789" mask="00 00000-0000">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required type="email" maxlength="100">
+      <mat-hint align="end">{{form.get('email')?.value?.length || 0}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Instagram</mat-label>
+      <span matPrefix>instagram.com/&nbsp;</span>
+      <input matInput formControlName="instagram" required maxlength="30">
+      <mat-hint align="end">{{form.get('instagram')?.value?.length || 0}}/30</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="descricaoHistoria" required maxlength="500"></textarea>
+      <mat-hint align="end">{{form.get('descricaoHistoria')?.value?.length || 0}}/500</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Funcionamento</mat-label>
+      <textarea matInput formControlName="descricaoFuncionamento" required maxlength="500"></textarea>
+      <mat-hint align="end">{{form.get('descricaoFuncionamento')?.value?.length || 0}}/500</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>CEP</mat-label>
+      <input matInput formControlName="cep" required placeholder="00000-000" mask="00000-000" (blur)="buscarCEP()">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Região</mat-label>
+      <input matInput formControlName="regiao" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="cidade" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="estado" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Rua</mat-label>
+      <input matInput formControlName="rua" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Bairro</mat-label>
+      <input matInput formControlName="bairro" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Latitude</mat-label>
+      <input matInput formControlName="latitude" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Longitude</mat-label>
+      <input matInput formControlName="longitude" readonly>
+    </mat-form-field>
+
+    <div>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput>
+        <div *ngIf="imagePreview">
+          <img [src]="imagePreview" height="100">
+          <button mat-button (click)="removeImage()">Remover Imagem</button>
+        </div>
+        <p *ngIf="fileName">Arquivo selecionado: {{fileName}}</p>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button (click)="onSubmit()" [disabled]="!form.valid">Salvar</button>
+  </mat-dialog-actions>

@@ -14,11 +14,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
-import { provideNgxMask } from 'ngx-mask';
+import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CadastroModalComponent } from './cadastro-modal/cadastro-modal.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -26,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     HomeComponent,
     MainHeaderComponent,
-    SearchComponent
+    SearchComponent,
+    CadastroModalComponent 
   ],
   imports: [
     BrowserModule,
@@ -41,7 +49,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule  
+    HttpClientModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]

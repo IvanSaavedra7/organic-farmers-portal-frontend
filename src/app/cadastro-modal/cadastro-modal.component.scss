@@ -1,0 +1,55 @@
+:host {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .mat-dialog-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin-left: 8px;
+  }
+  
+  .image-preview {
+    margin-top: 15px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+
+  .success-snackbar {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .error-snackbar {
+    background: #F44336;
+    color: white;
+  }
+  
+  .warning-snackbar {
+    background: #FFC107;
+    color: black;
+  }
+  
+  .mat-simple-snackbar {
+    font-size: 20px;
+  }
+  
+  .mat-simple-snackbar-action {
+    color: white;
+  }

@@ -5,6 +5,8 @@ import { IPontoDistribuicao, IProdutor } from '../models/produtor.model';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
+import { MatDialog } from '@angular/material/dialog';
+import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 
 
 @Component({
@@ -37,11 +39,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private dbService: DatabaseService
+    private dbService: DatabaseService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.loadPopularItems();
+  }
+
+  openCadastroModal() {
+    const dialogRef = this.dialog.open(CadastroModalComponent, {
+      width: '500px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Atualizar a lista de itens ou fazer qualquer outra ação necessária
+      }
+    });
   }
 
   async loadPopularItems() {
