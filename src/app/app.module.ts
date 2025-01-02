@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CadastroModalComponent } from './cadastro-modal/cadastro-modal.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FooterComponent } from './footer/footer.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
@@ -34,7 +35,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HomeComponent,
     MainHeaderComponent,
     SearchComponent,
-    CadastroModalComponent 
+    CadastroModalComponent,
+    FooterComponent 
   ],
   imports: [
     BrowserModule,
